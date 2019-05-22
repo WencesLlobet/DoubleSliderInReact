@@ -27,7 +27,8 @@ class NameForm extends React.Component {
     e.preventDefault()
     this.setState({
       relativePosition: {
-        x: e.pageX
+        x: e.pageX,
+        boxInitialPos: this.state.incrementingMargin
       }
     })
   }
@@ -42,16 +43,12 @@ class NameForm extends React.Component {
     if(this.state.isNotDragging){
       return;
     }
-    var inc = e.pageX - this.state.relativePosition.x;
-    console.log(inc + " = "+e.pageX+ "-"+ this.state.relativePosition.x );
-    var movedBoxMargin = this.state.incrementingMargin + inc;
-    this.setState({incrementingMargin: movedBoxMargin}); 
-     
-    this.setState({
-      relativePosition: {
-        x: e.pageX
-      }
-    })
+    console.log(e.pageX + "-" +
+     this.state.relativePosition.x + " + " +this.state.relativePosition.boxInitialPos);
+    
+    this.setState({incrementingMargin: e.pageX -
+     this.state.relativePosition.x + this.state.relativePosition.boxInitialPos}); 
+
     e.stopPropagation()
     e.preventDefault()
   }
