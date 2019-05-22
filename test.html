@@ -1,0 +1,102 @@
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@16.3.0/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16.3.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+<script type="text/babel">
+
+class NameForm extends React.Component {
+  state = {
+      error: this.props.getErrorMessage(''),
+      xpos: 0,
+      boxStyle: {marginLeft: 20, width: 10, height: 20, backgroundColor: 'powderblue',position: 'absolute', zIndex: 1},
+      backgroundBar: {marginTop: 8, width: 300, height:3, backgroundColor:'lightgray',position: 'absolute', zIndex: 0},
+      incrementingMargin: 0,
+
+  }
+  componentDidMount = idontknowthis =>  {
+      var self = this;
+
+  }
+
+  onMouseDown =  e => {
+    this.setState({incrementingMargin: 20}); 
+    e.stopPropagation()
+    e.preventDefault()
+  }
+
+  handleSubmit = event => {
+    event.preventDefault()
+    const value =
+      event.target.elements.username.value
+    const error = this.props.getErrorMessage(
+      value,
+    )
+    if (error) {
+    //  alert(`error: ${error}`)
+    } else {
+     // alert(`success: ${value}`)
+    }
+
+    this.boxStyle.marginLeft += 20 ;
+  }
+  handleChange = event => {
+    const {value} = event.target
+    this.setState({
+      error: this.props.getErrorMessage(value),
+    })
+  }
+
+  
+  render() {
+    const {error, incrementingMargin} = this.state
+    console.log(incrementingMargin)
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Name:
+          <input
+            type="text"
+            onChange={this.handleChange}
+            name="username"
+          />
+        </label>
+        {error ? (
+          <div style={{color: 'red'}}>
+            {error}
+          </div>
+        ) : null}
+        <button
+          disabled={Boolean(error)}
+          type="submit"
+        >
+          Submit
+        </button>
+        <div style={{position: 'relative'}}>
+            <div style={this.state.backgroundBar}/>
+
+            <div onMouseDown={this.onMouseDown}
+            style={{marginLeft: incrementingMargin, width: 10, height: 20, backgroundColor: 'powderblue',position: 'absolute', zIndex: 1 }}/>
+      </div>
+      </form>
+    )
+  }
+}
+
+ReactDOM.render(
+  <NameForm
+    getErrorMessage={value => {
+      if (value.length < 3) {
+        return `Value must be at least 3 characters, but is only ${value.length}`
+      }
+      if (!value.includes('s')) {
+        return `Value does not include "s" but it should!`
+      }
+      return null
+    }}
+  />,
+  document.getElementById('root'), 
+
+)
+</script>
+</body>
