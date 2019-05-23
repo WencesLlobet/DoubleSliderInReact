@@ -23,14 +23,14 @@ class NameForm extends React.Component {
 
   onMouseDown =  e => {
     this.setState({isNotDragging: false});
-    e.stopPropagation()
-    e.preventDefault()
     this.setState({
       relativePosition: {
         x: e.pageX,
         boxInitialPos: this.state.incrementingMargin
       }
     })
+    e.stopPropagation()
+    e.preventDefault()
   }
 
   onMouseUp =  e => {
@@ -99,11 +99,9 @@ class NameForm extends React.Component {
         >
           Submit
         </button>
-        <div style={{position: 'relative'}}>
+        <div style={{position: 'relative'}} onMouseMove={this.onMouseMove} onMouseUp ={this.onMouseUp} style={{width: 300, height: 30}}>
             <div style={this.state.backgroundBar}/>
             <div onMouseDown={this.onMouseDown}
-            onMouseMove={this.onMouseMove}
-            onMouseUp ={this.onMouseUp}
             style={{marginLeft: incrementingMargin, width: 10, height: 20, backgroundColor: 'powderblue',position: 'absolute', zIndex: 1 }}/>
       </div>
       </form>
