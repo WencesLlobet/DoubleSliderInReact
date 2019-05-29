@@ -1,6 +1,8 @@
-import React from 'react';
+import React,{Component} from 'react';
 
-export const SearchForm = (props)=> {return (<div className="searchForm-wrapper">
+export class SearchForm extends Component(){
+
+ render() {return (<div className="searchForm-wrapper">
       <div className="field has-addons">
         <div className="control">
           <input className="input" type="text" placeholder="Group"/>
@@ -10,10 +12,11 @@ export const SearchForm = (props)=> {return (<div className="searchForm-wrapper"
         </div>
         <div className="control">
           <button className="button is-info" onClick={( )=>{
-              props.songReceived("people, all the people moving")}
+              this.props.songReceived("people, all the people moving")}
           }>
             Search
           </button>
         </div>
       </div>
     </div>)}
+}
