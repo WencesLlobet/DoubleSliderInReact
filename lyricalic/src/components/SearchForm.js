@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 
-export class SearchForm extends Component(){
+export class SearchForm extends Component{
 
  render() {return (<div className="searchForm-wrapper">
       <div className="field has-addons">
