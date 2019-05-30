@@ -10,21 +10,33 @@ export class App extends Component {
   
   constructor(){
     super()
-    this.state = { url: 'https://www.gstatic.com/webp/gallery3/1.sm.png'}
+    this.state = { song: "cat dog", url: 'https://www.gstatic.com/webp/gallery3/1.sm.png'}
   }
   songReceived = (song) => {
-    fetch('http://api.giphy.com/v1/gifs/search?api_key=***REMOVED***&q='+song+'&limit=1')
+
+    song.split(" ").map( (word) => {
+      console.log("searching: "+word)
+    fetch('http://api.giphy.com/v1/gifs/search?api_key='+process.env.REACT_APP_GIPHY_TOKEN+'&q='+word+'&limit=1')
     .then(response => response.json())
     .then( (json)=>{
-      this.setState({url: json.data[0].images.fixed_width_small.url})
+      this.setState({['songUrl_'+word]: json.data[0].images.fixed_width_small.url})
     })
+
+    })
+      this.setState({song: song})
   }
 
   render ( ){
     return (
       <div className="App">
           <SearchForm songReceived={this.songReceived}/>
-          <img src={this.state.url}></img>
+          {this.state.song.split(" ").map( (word,i) => {
+            console.log("pringing: "+word)
+           return <li key={i}>
+            <img  src={this.state['songUrl_'+word]}></img>
+            {word}
+           </li>
+          })}
       </div>
    );
   }

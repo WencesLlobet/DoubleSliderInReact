@@ -11,7 +11,7 @@ export class SearchForm extends Component{
           <input className="input" type="text" placeholder="Group"/>
         </div>
         <div className="control">
-          <input onChange={this.songTyped} class="input" type="text" placeholder="Song"/>
+          <input onChange={this.songTyped} className="input" type="text" placeholder="Song"/>
         </div>
         <div className="control">
           <button className="button is-info" onClick={( )=>{
