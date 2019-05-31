@@ -11,15 +11,15 @@ export class App extends Component {
   }
 
   componentDidMount() {
-      this.songToGifsMosaicState()
+      this.songToGifsMosaicState(this.state.song)
   }
   songReceived = (song) => {
     this.setState({song: song})
-    this.songToGifsMosaicState()
+    this.songToGifsMosaicState(song)
   }
 
-  songToGifsMosaicState = () => {
-    this.state.song.split(" ").map( (word) => {
+  songToGifsMosaicState = (song) => {
+    song.split(" ").map( (word) => {
       this.getGifForWord(word, (gifUrl)=>{
           this.setState({['songUrl_'+word]: gifUrl})})
     });
@@ -33,17 +33,20 @@ export class App extends Component {
       })
   }
 
+  
   render ( ){ 
     return (
       <div className="App">
           <SearchForm songReceived={this.songReceived}/>
+            <div class="panel">
             {this.state.song.split(" ").map( (word,i) => {
-              return <li key={i}>
-                        <img  src= {this.state['songUrl_'+word]} 
+              return <div class="container">
+                        <img  key={i} src= {this.state['songUrl_'+word]} 
                               alt="word"/>
-                        {word}
-                     </li>
-          })}
+                        <div class="centered">{word.toUpperCase()}</div>
+                      </div>
+            })}
+          </div>
       </div>
    );
   }

@@ -6,4 +6,28 @@
 .searchForm-wrapper {
   display: flex;
   justify-content: center;
+  
+}
+
+/* Centered text */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+}
+
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+  font-weight: 900;
+  font-size: 20px;
+}
+
+.panel{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
