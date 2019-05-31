@@ -11,11 +11,11 @@ export class App extends Component {
   }
 
   componentDidMount() {
-      this.songToGifsMosaicState(this.state.song)
+      this.songToGifsMosaicState()
   }
   songReceived = (song) => {
     this.setState({song: song})
-    this.songToGifsMosaicState(song)
+    this.songToGifsMosaicState()
   }
 
   songToGifsMosaicState = () => {
@@ -24,7 +24,7 @@ export class App extends Component {
           this.setState({['songUrl_'+word]: gifUrl})})
     });
   }
-  
+
   getGifForWord = (word, callback)=> {
     fetch('http://api.giphy.com/v1/gifs/search?api_key='+process.env.REACT_APP_GIPHY_TOKEN+'&q='+word+'&limit=1')
       .then(response => response.json())
